@@ -52,7 +52,7 @@ public class RoundKnobButton extends RelativeLayout implements OnGestureListener
 	private int					m_nWidth = 0, m_nHeight = 0;
 	
 	private float 				angle = 0;
-	private static final float	step = 360 / 10;
+	private static final float	step = 360 / 36;
 	
 	interface RoundKnobButtonListener {
 		public void onStateChange(boolean newstate) ;
@@ -130,7 +130,6 @@ public class RoundKnobButton extends RelativeLayout implements OnGestureListener
 		float x = event.getX() / ((float) getWidth());
 		float y = event.getY() / ((float) getHeight());
 		mAngleDown = cartesianToPolar(1 - x, 1 - y);// 1- to correct our custom axis direction
-		Log.d("Debug", "Down:"+mAngleDown);
 		return true;
 	}
 	
@@ -168,13 +167,13 @@ public class RoundKnobButton extends RelativeLayout implements OnGestureListener
 		float y = e2.getY() / ((float) getHeight());
 		float rotDegrees = cartesianToPolar(1 - x, 1 - y);// 1- to correct our custom axis direction 
 		if (! Float.isNaN(rotDegrees)) {
-			if (Math.abs(rotDegrees - mAngleDown) > step / 2) {
+			if (Math.abs(rotDegrees - mAngleDown) >= step / 2) {
 				if (rotDegrees - mAngleDown < 0) 
 					angle -= step;
 				else
 					angle += step;
 				mAngleDown = rotDegrees;
-			
+				//Log.d("!!", ""+(rotDegrees - mAngleDown)+" "+angle+" "+rotDegrees);
 				if (angle < 0) angle += 360;
 				if (angle > 360) angle -= 360;
 			
