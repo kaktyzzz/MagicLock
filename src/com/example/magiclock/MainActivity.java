@@ -1,7 +1,6 @@
 package com.example.magiclock;
 
 import com.example.magiclock.RoundKnobButton.RoundKnobButtonListener;
-import com.example.magiclock.R;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -46,8 +45,6 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     
-        // Scaling mechanism, as explained on:
-        // http://www.pocketmagic.net/2013/04/how-to-scale-an-android-ui-on-multiple-screens/
         m_Inst.InitGUIFrame(this);
         
         RelativeLayout panel = new RelativeLayout(this);
@@ -67,12 +64,12 @@ public class MainActivity extends Activity {
 
           		
         RoundKnobButton rv = new RoundKnobButton(this, R.drawable.stator, R.drawable.rotoron, R.drawable.rotoroff, 
-        		m_Inst.Scale(250), m_Inst.Scale(250));
+        		m_Inst.Scale(500), m_Inst.Scale(500));
         lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		lp.addRule(RelativeLayout.CENTER_IN_PARENT);
 		panel.addView(rv, lp);
         
-        rv.setRotorPercentage(100);
+        //rv.setRotorPercentage(100);
         rv.SetListener(new RoundKnobButtonListener() {
 			public void onStateChange(boolean newstate) {
 				Toast.makeText(MainActivity.this,  "New state:"+newstate,  Toast.LENGTH_SHORT).show();
@@ -81,7 +78,7 @@ public class MainActivity extends Activity {
 			public void onRotate(final int percentage) {
 				tv2.post(new Runnable() {
 					public void run() {
-						tv2.setText("\n" + percentage + "%\n");
+						tv2.setText("\n" + percentage + "\n");
 					}
 				});
 			}
