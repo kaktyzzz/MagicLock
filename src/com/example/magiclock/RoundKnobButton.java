@@ -161,25 +161,49 @@ public class RoundKnobButton extends RelativeLayout implements OnGestureListener
 		setRotorPosAngle(posDegree);
 	}
 	
+	public float normalizeAngle(float angle) {
+		if (angle < 0) angle += 360;
+		if (angle >= 360) angle -= 360;
+		return angle;
+	}
+	
+	public float plusnormalizeAngle (float angle) {
+		if (angle < 0) angle += 360;
+		return angle;
+	}
+		
 	
 	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
 		float x = e2.getX() / ((float) getWidth());
 		float y = e2.getY() / ((float) getHeight());
 		float rotDegrees = cartesianToPolar(1 - x, 1 - y);// 1- to correct our custom axis direction 
+		rotDegrees = plusnormalizeAngle(rotDegrees);
 		if (! Float.isNaN(rotDegrees)) {
-			if (Math.abs(rotDegrees - mAngleDown) >= step / 2) {
-				if (rotDegrees - mAngleDown < 0) 
-					angle -= step;
-				else
-					angle += step;
-				mAngleDown = rotDegrees;
-				//Log.d("!!", ""+(rotDegrees - mAngleDown)+" "+angle+" "+rotDegrees);
-				if (angle < 0) angle += 360;
-				if (angle >= 360) angle -= 360;
 			
-				float posDegrees = angle;
-				setRotorPosAngle(posDegrees);
-				if (m_listener != null) m_listener.onRotate((int)posDegrees);
+			float length = rotDegrees - mAngleDown;
+			if (length > 180)
+				length -= 360;
+			if (length < -180)
+				length += 360;
+			
+			
+			Log.d("!!", length+" "+angle+" "+rotDegrees+" "+mAngleDown);
+			if (Math.abs(length) > step / 2) {
+				if (length < 0) { 
+					angle -= step;
+					mAngleDown -= step;
+				}
+				else {
+					angle += step;
+					mAngleDown += step;
+				}
+				
+				angle = normalizeAngle(angle);
+				mAngleDown = normalizeAngle(mAngleDown);
+				
+			
+				setRotorPosAngle(angle);
+				if (m_listener != null) m_listener.onRotate((int)angle);
 			}
 			return true; //consumed
 		} else
