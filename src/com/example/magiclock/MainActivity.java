@@ -5,6 +5,7 @@ import com.example.magiclock.RoundKnobButton.RoundKnobButtonListener;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Gravity;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,23 +51,36 @@ public class MainActivity extends Activity {
         RelativeLayout panel = new RelativeLayout(this);
         setContentView(panel);
        
-        TextView tv = new TextView(this); tv.setText("Rotary knob control\nRadu Motisan 2013\nwww.pocketmagic.net"); tv.setGravity(Gravity.CENTER);
+        TextView tv = new TextView(this);
+        	tv.setTextSize(32);
+        	tv.setText("\nMagicSafe"); 
+        	tv.setGravity(Gravity.CENTER);
+        final TextView tv1 = new TextView(this);
+    		tv1.setTextSize(16);
+    		tv1.setText(""); 
+    		tv1.setGravity(Gravity.CENTER);
+    		
+    	LinearLayout textPanel = new LinearLayout(this);
+    	textPanel.setOrientation(LinearLayout.VERTICAL);
+    	textPanel.addView(tv);
+    	textPanel.addView(tv1);
+    		
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-  		lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
-  		lp.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-  		panel.addView(tv, lp);
+  			lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
+  			lp.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+  		panel.addView(textPanel, lp);
       	
-        final TextView tv2 = new TextView(this); tv2.setText("");
+        TextView tv2 = new TextView(this);
+        	tv2.setText("\nby ktz");
         lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-  		lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
-  		lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+  			lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
+  			lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
   		panel.addView(tv2, lp);
 
           		
-        RoundKnobButton rv = new RoundKnobButton(this, R.drawable.stator, R.drawable.rotoron, R.drawable.rotoroff, 
-        		m_Inst.Scale(500), m_Inst.Scale(500));
+        RoundKnobButton rv = new RoundKnobButton(this, R.drawable.stator, R.drawable.rotoron, R.drawable.rotoroff, m_Inst.Scale(500), m_Inst.Scale(500));
         lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		lp.addRule(RelativeLayout.CENTER_IN_PARENT);
+			lp.addRule(RelativeLayout.CENTER_IN_PARENT);
 		panel.addView(rv, lp);
         
         //rv.setRotorPercentage(100);
@@ -76,9 +90,9 @@ public class MainActivity extends Activity {
 			}
 			
 			public void onRotate(final int percentage) {
-				tv2.post(new Runnable() {
+				tv1.post(new Runnable() {
 					public void run() {
-						tv2.setText("\n" + percentage + "\n");
+						tv1.setText("\nPosition: " + percentage + "\n");
 					}
 				});
 			}
