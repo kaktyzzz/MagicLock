@@ -78,7 +78,7 @@ public class MainActivity extends Activity {
   		panel.addView(tv2, lp);
 
           		
-        RoundKnobButton rv = new RoundKnobButton(this, R.drawable.stator, R.drawable.rotoron, R.drawable.rotoroff, m_Inst.Scale(500), m_Inst.Scale(500));
+        RoundKnobButton rv = new RoundKnobButton(this, R.drawable.stator_new, R.drawable.rotor, R.drawable.rotor, m_Inst.Scale(600), m_Inst.Scale(600));
         lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			lp.addRule(RelativeLayout.CENTER_IN_PARENT);
 		panel.addView(rv, lp);

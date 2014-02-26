@@ -52,7 +52,9 @@ public class RoundKnobButton extends RelativeLayout implements OnGestureListener
 	private int					m_nWidth = 0, m_nHeight = 0;
 	
 	private float 				angle = 0;
-	private static final float	step = 360 / 36;
+	private static final float  range = 100;
+	private static final float	step = 360f / range;
+	
 	
 	interface RoundKnobButtonListener {
 		public void onStateChange(boolean newstate) ;
@@ -106,7 +108,6 @@ public class RoundKnobButton extends RelativeLayout implements OnGestureListener
 		SetState(mState);
 		// enable gesture detector
 		gestureDetector = new GestureDetector(getContext(), this);
-		
 		setRotorPosAngle(angle); // Начальная установка
 	}
 	
@@ -187,8 +188,9 @@ public class RoundKnobButton extends RelativeLayout implements OnGestureListener
 				length += 360;
 			
 			
-			Log.d("!!", length+" "+angle+" "+rotDegrees+" "+mAngleDown);
+			
 			if (Math.abs(length) > step / 2) {
+				//Log.d("!!", length+" "+angle+" "+rotDegrees+" "+mAngleDown+" " + step);
 				if (length < 0) { 
 					angle -= step;
 					mAngleDown -= step;
@@ -203,7 +205,8 @@ public class RoundKnobButton extends RelativeLayout implements OnGestureListener
 				
 			
 				setRotorPosAngle(angle);
-				if (m_listener != null) m_listener.onRotate((int)angle);
+				//if (m_listener != null) m_listener.onRotate((int)(angle/step));
+				if (m_listener != null) m_listener.onRotate((int)(Math.abs(Math.round(angle/step) - range) % range));
 			}
 			return true; //consumed
 		} else
