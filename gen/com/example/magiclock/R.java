@@ -22,7 +22,7 @@ public final class R {
         public static final int rotoroff=0x7f020003;
         public static final int rotoron=0x7f020004;
         public static final int stator=0x7f020005;
-        public static final int stator_new=0x7f020006;
+        public static final int stator_old=0x7f020006;
     }
     public static final class id {
         public static final int menu_settings=0x7f080000;

@@ -1,5 +1,7 @@
 package com.example.magiclock;
 
+import java.util.Random;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -54,7 +56,7 @@ public class RoundKnobButton extends RelativeLayout implements OnGestureListener
 	private float 				angle = 0;
 	private static final float  range = 100;
 	private static final float	step = 360f / range;
-	
+	private static final float	stepDiv2 = step / 2;
 	
 	interface RoundKnobButtonListener {
 		public void onStateChange(boolean newstate) ;
@@ -108,6 +110,8 @@ public class RoundKnobButton extends RelativeLayout implements OnGestureListener
 		SetState(mState);
 		// enable gesture detector
 		gestureDetector = new GestureDetector(getContext(), this);
+		
+		angle = new Random().nextInt((int)range) * step;
 		setRotorPosAngle(angle); // Начальная установка
 	}
 	
@@ -189,7 +193,7 @@ public class RoundKnobButton extends RelativeLayout implements OnGestureListener
 			
 			
 			
-			if (Math.abs(length) > step / 2) {
+			if (Math.abs(length) > stepDiv2) {
 				//Log.d("!!", length+" "+angle+" "+rotDegrees+" "+mAngleDown+" " + step);
 				if (length < 0) { 
 					angle -= step;
@@ -206,7 +210,10 @@ public class RoundKnobButton extends RelativeLayout implements OnGestureListener
 			
 				setRotorPosAngle(angle);
 				//if (m_listener != null) m_listener.onRotate((int)(angle/step));
-				if (m_listener != null) m_listener.onRotate((int)(Math.abs(Math.round(angle/step) - range) % range));
+				float position = Math.abs(Math.round(angle/step) - range);
+				if (position == range)
+					position = 0;
+				if (m_listener != null) m_listener.onRotate((int)position);
 			}
 			return true; //consumed
 		} else
