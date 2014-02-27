@@ -71,7 +71,7 @@ public class MagicLock extends Activity {
   		panel.addView(textPanel, lp);
       	
         TextView tv2 = new TextView(this);
-        	tv2.setText("\nby ktz");
+        	tv2.setText("by ktz\n");
         lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
   			lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
   			lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
