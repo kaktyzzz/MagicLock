@@ -54,7 +54,7 @@ public class RoundKnobButton extends RelativeLayout implements OnGestureListener
 	private int					m_nWidth = 0, m_nHeight = 0;
 	
 	private float 				angle = 0;
-	private static final float  range = 100;
+	private static final float  range = 50;
 	private static final float	step = 360f / range;
 	private static final float	stepDiv2 = step / 2;
 	
@@ -209,6 +209,7 @@ public class RoundKnobButton extends RelativeLayout implements OnGestureListener
 				
 			
 				setRotorPosAngle(angle);
+				
 				//if (m_listener != null) m_listener.onRotate((int)(angle/step));
 				float position = Math.abs(Math.round(angle/step) - range);
 				if (position == range)

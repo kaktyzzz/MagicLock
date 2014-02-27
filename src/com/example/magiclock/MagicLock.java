@@ -37,7 +37,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 ****************************************************************************/
-public class MainActivity extends Activity {
+public class MagicLock extends Activity {
 
 	Singleton m_Inst = Singleton.getInstance();
 		
@@ -86,7 +86,7 @@ public class MainActivity extends Activity {
         //rv.setRotorPercentage(100);
         rv.SetListener(new RoundKnobButtonListener() {
 			public void onStateChange(boolean newstate) {
-				Toast.makeText(MainActivity.this,  "New state:"+newstate,  Toast.LENGTH_SHORT).show();
+				Toast.makeText(MagicLock.this,  "New state:"+newstate,  Toast.LENGTH_SHORT).show();
 			}
 			
 			public void onRotate(final int percentage) {
