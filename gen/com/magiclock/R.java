@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.example.magiclock;
+package com.magiclock;
 
 public final class R {
     public static final class attr {
@@ -38,5 +38,6 @@ public final class R {
     }
     public static final class style {
         public static final int AppTheme=0x7f060000;
+        public static final int Theme_Transparent=0x7f060001;
     }
 }

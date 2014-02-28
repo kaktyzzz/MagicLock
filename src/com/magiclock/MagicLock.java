@@ -1,10 +1,13 @@
-package com.example.magiclock;
+package com.magiclock;
 
-import com.example.magiclock.RoundKnobButton.RoundKnobButtonListener;
+import com.magiclock.R;
+import com.magiclock.RoundKnobButton.RoundKnobButtonListener;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Gravity;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -45,7 +48,22 @@ public class MagicLock extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    
+        
+        getWindow().addFlags(
+				WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+						| WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+						//| WindowManager.LayoutParams.FLAG_FULLSCREEN
+		);
+        
+		if ((getIntent() != null) && getIntent().hasExtra("kill")
+				&& (getIntent().getExtras().getInt("kill") == 1)) {
+			finish();
+		}
+		
+		startService(new Intent(this, LockService.class));
+		// стартуем отслеживание состояния телефона
+		//StateListener phoneStateListener = new StateListener();
+		
         m_Inst.InitGUIFrame(this);
         
         RelativeLayout panel = new RelativeLayout(this);
@@ -87,6 +105,7 @@ public class MagicLock extends Activity {
         rv.SetListener(new RoundKnobButtonListener() {
 			public void onStateChange(boolean newstate) {
 				Toast.makeText(MagicLock.this,  "New state:"+newstate,  Toast.LENGTH_SHORT).show();
+				finish(); // Шатдауним активити
 			}
 			
 			public void onRotate(final int percentage) {

@@ -1,4 +1,4 @@
-package com.example.magiclock;
+package com.magiclock;
 
 import java.util.Random;
 
@@ -112,7 +112,7 @@ public class RoundKnobButton extends RelativeLayout implements OnGestureListener
 		gestureDetector = new GestureDetector(getContext(), this);
 		
 		angle = new Random().nextInt((int)range) * step;
-		setRotorPosAngle(angle); // Начальная установка
+		setRotorPosAngle(angle); // РќР°С‡Р°Р»СЊРЅР°СЏ СѓСЃС‚Р°РЅРѕРІРєР°
 	}
 	
 	/**

@@ -1,4 +1,4 @@
-package com.example.magiclock;
+package com.magiclock;
 
 import java.io.File;
 import java.util.ArrayList;
